@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
@@ -9,35 +10,34 @@
 body {
   margin:0;
   font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(#ffe0cc, #fff5f0);
   text-align:center;
-  background:#fffafc;
-  color:#333;
+  overflow-x:hidden;
 }
 
 .hero {
-  padding:60px 20px;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  animation: fadeIn 2s;
 }
 
-h1 {
-  font-size:40px;
+h1 {font-size:42px;}
+.heart {color:#e25555;}
+
+.quote {
+  font-style:italic;
+  margin-top:10px;
 }
 
-.heart {
-  color:#e25555;
-}
-
-.section {
-  padding:40px 20px;
-}
+.section {padding:50px 20px;}
 
 img {
-  width:90%;
+  width:85%;
   border-radius:16px;
-  margin:15px 0;
-}
-
-.map {
-  margin-top:20px;
+  margin:10px 0;
 }
 
 iframe {
@@ -47,12 +47,32 @@ iframe {
   border-radius:12px;
 }
 
-audio {
+@keyframes fadeIn {
+  from {opacity:0;}
+  to {opacity:1;}
+}
+
+.hearts {
   position:fixed;
-  bottom:10px;
-  left:10px;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  pointer-events:none;
+}
+
+.heart-float {
+  position:absolute;
+  color:#ff6b81;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  from {transform: translateY(100vh);}
+  to {transform: translateY(-10vh);}
 }
 </style>
+
 </head>
 
 <body>
@@ -61,11 +81,7 @@ audio {
   <h1>Minh Trân <span class="heart">❤</span> Đức Huy</h1>
   <p>09.05.2026 - 18:00</p>
   <p>Nhà hàng Pavillon Tân Sơn Nhất</p>
-</div>
-
-<div class="section">
-  <h2>💌 Trân trọng kính mời</h2>
-  <p>Đến chung vui cùng chúng tôi trong ngày trọng đại</p>
+  <p class="quote">“From this day forward, you are my always.”</p>
 </div>
 
 <div class="section">
@@ -74,7 +90,7 @@ audio {
   <img src="photo2.jpg">
 </div>
 
-<div class="section map">
+<div class="section">
   <h2>📍 Địa điểm</h2>
   <iframe src="https://www.google.com/maps?q=202+Hoang+Van+Thu+Phu+Nhuan+HCM&output=embed"></iframe>
 </div>
@@ -82,6 +98,20 @@ audio {
 <audio controls autoplay loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
+
+<div class="hearts" id="hearts"></div>
+
+<script>
+for(let i=0;i<25;i++){
+  let heart = document.createElement("div");
+  heart.className="heart-float";
+  heart.innerHTML="❤";
+  heart.style.left=Math.random()*100+"%";
+  heart.style.fontSize=(Math.random()*20+10)+"px";
+  heart.style.animationDuration=(Math.random()*5+5)+"s";
+  document.getElementById("hearts").appendChild(heart);
+}
+</script>
 
 </body>
 </html>
